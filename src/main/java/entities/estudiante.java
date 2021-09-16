@@ -1,51 +1,58 @@
 package entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Estudiante")
-public class estudiante {
+public class Estudiante {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Integer id;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id_estudiante;
-	
-	@ManyToOne
-	@JoinColumn(name = "Id_Usuario", nullable = false)
-	private Usuario id_Usuario;
+    @OneToOne(orphanRemoval = true)
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 
-	public estudiante() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    @ManyToMany
+    @JoinTable(name = "Estudiante_secciones",
+            joinColumns = @JoinColumn(name = "estudiante_id"),
+            inverseJoinColumns = @JoinColumn(name = "secciones_id"))
+    private List<Seccion> secciones;
 
-	public estudiante(int id_estudiante, Usuario id_Usuario) {
-		super();
-		this.id_estudiante = id_estudiante;
-		this.id_Usuario = id_Usuario;
-	}
+    @OneToMany(mappedBy = "estudiante", orphanRemoval = true)
+    private List<Tarea> tareas;
 
-	public int getId_estudiante() {
-		return id_estudiante;
-	}
+    public List<Tarea> getTareas() {
+        return tareas;
+    }
 
-	public void setId_estudiante(int id_estudiante) {
-		this.id_estudiante = id_estudiante;
-	}
+    public void setTareas(List<Tarea> tareas) {
+        this.tareas = tareas;
+    }
 
-	public Usuario getId_Usuario() {
-		return id_Usuario;
-	}
+    public List<Seccion> getSecciones() {
+        return secciones;
+    }
 
-	public void setId_Usuario(Usuario id_Usuario) {
-		this.id_Usuario = id_Usuario;
-	}
-	
-	
+    public void setSecciones(List<Seccion> secciones) {
+        this.secciones = secciones;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 }

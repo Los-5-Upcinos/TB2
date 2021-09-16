@@ -6,82 +6,78 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Objects;
 
 @Entity
-@Table(name="Usuario")
+@Table(name = "Usuario")
 public class Usuario {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int Id_Usuario;
-	
-	@Column(name = "nombre_usuario", nullable = false, length = 45)
-	private String nombre_usuario;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Integer id;
 
-	@Column(name = "contraseña_usuario", nullable = false, length = 45)
-	private String contraseña_usuario;
+    @Column(name = "nombre")
+    private String nombre;
 
-	public Usuario() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    @Column(name = "password")
+    private String password;
 
-	public Usuario(int id_Usuario, String nombre_usuario, String contraseña_usuario) {
-		super();
-		this.Id_Usuario = id_Usuario;
-		this.nombre_usuario = nombre_usuario;
-		this.contraseña_usuario = contraseña_usuario;
-	}
+    @Column(name = "correo")
+    private String correo;
 
-	public int getId_Usuario() {
-		return Id_Usuario;
-	}
+    public String getCorreo() {
+        return correo;
+    }
 
-	public void setId_Usuario(int id_Usuario) {
-		Id_Usuario = id_Usuario;
-	}
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
 
-	public String getNombre_usuario() {
-		return nombre_usuario;
-	}
+    public Usuario() {
+        super();
+    }
 
-	public void setNombre_usuario(String nombre_usuario) {
-		this.nombre_usuario = nombre_usuario;
-	}
+    public Usuario(Integer id, String nombre, String password) {
+        this.id = id;
+        this.nombre = nombre;
+        this.password = password;
+    }
 
-	public String getContraseña_usuario() {
-		return contraseña_usuario;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setContraseña_usuario(String contraseña_usuario) {
-		this.contraseña_usuario = contraseña_usuario;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + Id_Usuario;
-		return result;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		VaccinationCenter other = (VaccinationCenter) obj;
-		if (Id_Usuario != other.Id_Usuario)
-			return false;
-		return true;
-	}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
+    public Integer getId() {
+        return id;
+    }
 
-	
-	
-	
-	
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Usuario usuario = (Usuario) o;
+        return Objects.equals(id, usuario.id) && Objects.equals(nombre, usuario.nombre) && Objects.equals(password, usuario.password) && Objects.equals(correo, usuario.correo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nombre, password, correo);
+    }
 }
