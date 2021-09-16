@@ -1,62 +1,67 @@
 package entities;
 
-import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.time.LocalDateTime;
+import java.util.List;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Curso")
 public class Curso {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id_curso;
-	
-	@Column(name = "fecha_inicio", length = 45, nullable = false)
-	private Date fecha_inicio;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Integer id;
 
-	@Column(name = "fecha_fin", length = 45, nullable = false)
-	private Date fecha_fin;
+    @Column(name = "fecha_inicio")
+    private LocalDateTime fechaInicio;
 
-	public Curso() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    @Column(name = "fecha_fin")
+    private LocalDateTime fechaFin;
 
-	public Curso(int id_curso, Date fecha_inicio, Date fecha_fin) {
-		super();
-		this.id_curso = id_curso;
-		this.fecha_inicio = fecha_inicio;
-		this.fecha_fin = fecha_fin;
-	}
+    @OneToMany(mappedBy = "curso", orphanRemoval = true)
+    private List<Material> materials;
 
-	public int getId_curso() {
-		return id_curso;
-	}
+    @OneToMany(mappedBy = "curso", orphanRemoval = true)
+    private List<Seccion> secciones;
 
-	public void setId_curso(int id_curso) {
-		this.id_curso = id_curso;
-	}
+    public List<Seccion> getSecciones() {
+        return secciones;
+    }
 
-	public Date getFecha_inicio() {
-		return fecha_inicio;
-	}
+    public void setSecciones(List<Seccion> secciones) {
+        this.secciones = secciones;
+    }
 
-	public void setFecha_inicio(Date fecha_inicio) {
-		this.fecha_inicio = fecha_inicio;
-	}
+    public List<Material> getMaterials() {
+        return materials;
+    }
 
-	public Date getFecha_fin() {
-		return fecha_fin;
-	}
+    public void setMaterials(List<Material> materials) {
+        this.materials = materials;
+    }
 
-	public void setFecha_fin(Date fecha_fin) {
-		this.fecha_fin = fecha_fin;
-	}
-	
+    public LocalDateTime getFechaFin() {
+        return fechaFin;
+    }
 
+    public void setFechaFin(LocalDateTime fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    public LocalDateTime getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(LocalDateTime fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 }
