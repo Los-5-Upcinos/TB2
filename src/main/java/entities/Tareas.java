@@ -1,77 +1,94 @@
 package entities;
 
-import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "Tareas")
-public class Tareas {
+@Table(name = "Tarea")
+public class Tarea {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id_tareas;
-	
+    public Tarea(Integer id, LocalDateTime fechaInicio, LocalDateTime fechaFin, String entregable, Seccion seccion, Estudiante estudiante) {
+        this.id = id;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.entregable = entregable;
+        this.seccion = seccion;
+        this.estudiante = estudiante;
+    }
 
-	@Column(name = "inicio_fecha", length = 45, nullable = false)
-	private Date inicio_fecha;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Integer id;
 
-	@Column(name = "fin_fecha", length = 45, nullable = false)
-	private Date fin_fecha;
-	
-	@Column(name = "entregable", nullable = false, length = 150)
-	private String entregable;
+    @Column(name = "fecha_inicio")
+    private LocalDateTime fechaInicio;
 
-	public Tareas() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    @Column(name = "fecha_fin")
+    private LocalDateTime fechaFin;
 
-	public Tareas(int id_tareas, Date inicio_fecha, Date fin_fecha, String entregable) {
-		super();
-		this.id_tareas = id_tareas;
-		this.inicio_fecha = inicio_fecha;
-		this.fin_fecha = fin_fecha;
-		this.entregable = entregable;
-	}
+    @Lob
+    @Column(name = "entregable")
+    private String entregable;
 
-	public int getId_tareas() {
-		return id_tareas;
-	}
+    @ManyToOne
+    @JoinColumn(name = "seccion_id")
+    private Seccion seccion;
 
-	public void setId_tareas(int id_tareas) {
-		this.id_tareas = id_tareas;
-	}
+    @ManyToOne
+    @JoinColumn(name = "estudiante_id")
+    private Estudiante estudiante;
 
-	public Date getInicio_fecha() {
-		return inicio_fecha;
-	}
+    public Tarea() {
+        super();
+    }
 
-	public void setInicio_fecha(Date inicio_fecha) {
-		this.inicio_fecha = inicio_fecha;
-	}
+    public Estudiante getEstudiante() {
+        return estudiante;
+    }
 
-	public Date getFin_fecha() {
-		return fin_fecha;
-	}
+    public void setEstudiante(Estudiante estudiante) {
+        this.estudiante = estudiante;
+    }
 
-	public void setFin_fecha(Date fin_fecha) {
-		this.fin_fecha = fin_fecha;
-	}
+    public Seccion getSeccion() {
+        return seccion;
+    }
 
-	public String getEntregable() {
-		return entregable;
-	}
+    public void setSeccion(Seccion seccion) {
+        this.seccion = seccion;
+    }
 
-	public void setEntregable(String entregable) {
-		this.entregable = entregable;
-	}
-	
-	
-	
+    public String getEntregable() {
+        return entregable;
+    }
+
+    public void setEntregable(String entregable) {
+        this.entregable = entregable;
+    }
+
+    public LocalDateTime getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(LocalDateTime fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    public LocalDateTime getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(LocalDateTime fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 }
+

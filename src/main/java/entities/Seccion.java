@@ -1,64 +1,58 @@
 package entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Seccion")
 public class Seccion {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Integer id;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id_seccion;
+    @ManyToMany
+    @JoinTable(name = "Seccion_estudiantes",
+            joinColumns = @JoinColumn(name = "seccion_id"),
+            inverseJoinColumns = @JoinColumn(name = "estudiantes_id"))
+    private List<Estudiante> estudiantes;
 
-	@ManyToOne
-	@JoinColumn(name = "id_curso", nullable = false)
-	private Curso curso;
+    @ManyToOne
+    @JoinColumn(name = "curso_id")
+    private Curso curso;
 
-	@ManyToOne
-	@JoinColumn(name = "id_docente", nullable = false)
-	private Profesor profesor;
+    @OneToMany(mappedBy = "seccion", orphanRemoval = true)
+    private List<Tarea> tareas;
 
-	public Seccion() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    public List<Tarea> getTareas() {
+        return tareas;
+    }
 
-	public Seccion(int id_seccion, Curso curso, Profesor profesor) {
-		super();
-		this.id_seccion = id_seccion;
-		this.curso = curso;
-		this.profesor = profesor;
-	}
+    public void setTareas(List<Tarea> tareas) {
+        this.tareas = tareas;
+    }
 
-	public int getId_seccion() {
-		return id_seccion;
-	}
+    public Curso getCurso() {
+        return curso;
+    }
 
-	public void setId_seccion(int id_seccion) {
-		this.id_seccion = id_seccion;
-	}
+    public void setCurso(Curso curso) {
+        this.curso = curso;
+    }
 
-	public Curso getCurso() {
-		return curso;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setCurso(Curso curso) {
-		this.curso = curso;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public Profesor getProfesor() {
-		return profesor;
-	}
+    public List<Estudiante> getEstudiantes() {
+        return estudiantes;
+    }
 
-	public void setProfesor(Profesor profesor) {
-		this.profesor = profesor;
-	}
-	
-	
+    public void setEstudiantes(List<Estudiante> estudiantes) {
+        this.estudiantes = estudiantes;
+    }
 }
