@@ -1,4 +1,4 @@
-package pe.edu.upc.entities;
+package entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Estudiante")
-public class Estudiante {
+public class estudiante {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,12 +20,12 @@ public class Estudiante {
 	@JoinColumn(name = "Id_Usuario", nullable = false)
 	private Usuario id_Usuario;
 
-	public Estudiante() {
+	public estudiante() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Estudiante(int id_estudiante, Usuario id_Usuario) {
+	public estudiante(int id_estudiante, Usuario id_Usuario) {
 		super();
 		this.id_estudiante = id_estudiante;
 		this.id_Usuario = id_Usuario;

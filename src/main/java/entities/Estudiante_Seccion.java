@@ -1,4 +1,4 @@
-package pe.edu.upc.entities;
+package entities;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -15,14 +15,14 @@ public class Estudiante_Seccion {
 	
 	@ManyToOne
 	@JoinColumn(name = "id_estudiante", nullable = false)
-	private Estudiante estudiante;
+	private estudiante estudiante;
 
 	public Estudiante_Seccion() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Estudiante_Seccion(Seccion seccion, Estudiante estudiante) {
+	public Estudiante_Seccion(Seccion seccion, estudiante estudiante) {
 		super();
 		this.seccion = seccion;
 		this.estudiante = estudiante;
@@ -36,11 +36,11 @@ public class Estudiante_Seccion {
 		this.seccion = seccion;
 	}
 
-	public Estudiante getEstudiante() {
+	public estudiante getEstudiante() {
 		return estudiante;
 	}
 
-	public void setEstudiante(Estudiante estudiante) {
+	public void setEstudiante(estudiante estudiante) {
 		this.estudiante = estudiante;
 	}
 	
