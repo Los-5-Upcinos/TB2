@@ -2,27 +2,32 @@ package serviceimpl;
 
 import entities.Curso;
 import service.ICursoService;
-
+import javax.inject.*;
 import java.util.List;
 
 public class ICursoServiceImpl implements ICursoService {
+
+    @Inject
+    private ICursoService cDao;
+
     @Override
     public void insertar(Curso curso) {
-
+        cDao.insertar(curso);
     }
 
     @Override
     public void eliminar(int idCurso) {
-
+        cDao.eliminar(idCurso);
     }
 
     @Override
     public List<Curso> listar() {
-        return null;
+        return cDao.listar();
     }
 
     @Override
     public void modificar(Curso curso) {
-
+        cDao.modificar(curso);
     }
+
 }
