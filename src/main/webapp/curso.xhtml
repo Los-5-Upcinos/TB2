@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="master.xhtml">
+
+    <ui:define name="title">
+        .:Registro de Cursos:.
+    </ui:define>
+
+    <ui:define name="titleCont">
+        <span>Curso</span>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form>
+
+            <h:outputLabel for="nombreCurso"
+                           value="Nombre Curso" styleClass="control-label" />
+            <p:inputText autocomplete="off" id="nombreCurso"
+                         styleClass="form-control"
+                         value="#{cursoController.curso.nombre}"
+                         maxlength="30" required="true" />
+
+
+            <h:outputLabel for="fechaInicio"
+                           value="Fecha Inicio" styleClass="control-label" />
+            <p:calendar autocomplete="off" id="fechaInicio"
+                         styleClass="form-control"
+                         value="#{cursoController.curso.fechaInicio}"
+                         maxlength="30" required="true" />
+
+            <h:outputLabel for="fechaFin"
+                           value="Fecha Fin" styleClass="control-label" />
+            <p:calendar autocomplete="off" id="fechaFin"
+                         styleClass="form-control"
+                         value="#{cursoController.curso.fechaFin}"
+                         maxlength="30" required="true" />
+
+            <br />
+            <p:commandButton value="Grabar"
+                             actionListener="#{cursoController.insertar}"
+                             styleClass="btn btn-primary " update="@form"/>
+            <p:commandButton value="Cancelar"
+                             action="listVaccination?faces-redirect=true" immediate="true"
+                             styleClass="btn btn-default" ajax="false" />
+            <p:commandButton value="Listar"
+                             action="cursolistar?faces-redirect=true" immediate="true"
+                             styleClass="btn btn-default" ajax="false" />
+
+        </h:form>
+    </ui:define>
+
+    <ui:define name="footerCont">
+
+    </ui:define>
+</ui:composition>
+</html>

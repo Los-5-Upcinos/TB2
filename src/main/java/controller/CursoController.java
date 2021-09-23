@@ -1,17 +1,21 @@
 package controller;
 
 import entities.Curso;
-import dao.ICursoDao;
 import service.ICursoService;
 
+import java.io.Serializable;
 import java.util.*;
 import javax.annotation.PostConstruct;
-import javax.inject.*;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 @Named
 @RequestScoped
-public class CursoController {
+public class CursoController implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @Inject
     private ICursoService cursoService;
     private String mensaje = "Error";

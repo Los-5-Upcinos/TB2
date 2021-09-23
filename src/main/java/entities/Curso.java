@@ -13,6 +13,9 @@ public class Curso {
     @Column(name = "id", nullable = false)
     private Integer id;
 
+    @Column(name = "nombre")
+    private String nombre;
+
     @Column(name = "fecha_inicio")
     private LocalDateTime fechaInicio;
 
@@ -24,6 +27,9 @@ public class Curso {
 
     @OneToMany(mappedBy = "curso", orphanRemoval = true)
     private List<Seccion> secciones;
+
+    public Curso() {
+    }
 
     public List<Seccion> getSecciones() {
         return secciones;
@@ -40,6 +46,10 @@ public class Curso {
     public void setMaterials(List<Material> materials) {
         this.materials = materials;
     }
+
+    public String getNombre(){return nombre;}
+
+    public void setNombre(String Nombre){this.nombre=Nombre;}
 
     public LocalDateTime getFechaFin() {
         return fechaFin;

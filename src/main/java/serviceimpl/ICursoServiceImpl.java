@@ -3,12 +3,15 @@ package serviceimpl;
 import entities.Curso;
 import service.ICursoService;
 import javax.inject.*;
+
+import dao.ICursoDao;
+
 import java.util.List;
 
 public class ICursoServiceImpl implements ICursoService {
 
     @Inject
-    private ICursoService cDao;
+    private ICursoDao cDao;
 
     @Override
     public void insertar(Curso curso) {

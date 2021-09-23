@@ -8,7 +8,7 @@ import javax.persistence.*;
 import javax.transaction.Transactional;
 
 public class ICursoDaoImpl implements ICursoDao {
-    @PersistenceContext(unitName = "PrograWeb")
+    @PersistenceContext(unitName = "TB2Web")
     private EntityManager entityManager;
 
     @Transactional
