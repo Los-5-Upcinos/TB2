@@ -1,14 +1,16 @@
 package controller;
 
-import entities.Curso;
-import service.ICursoService;
-
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import entities.Curso;
+import service.ICursoService;
 
 @Named
 @RequestScoped
@@ -34,6 +36,7 @@ public class CursoController implements Serializable {
     public void init() {
         this.cursoList = new ArrayList<Curso>();
         this.curso = new Curso();
+        this.setCurso(new Curso());
         this.listar();
     }
 
@@ -44,11 +47,11 @@ public class CursoController implements Serializable {
 
     public void insertar() {
         try {
-
             cursoService.insertar(curso);
             this.listar();
         } catch (Exception e) {
             e.getMessage();
+
         }
     }
 

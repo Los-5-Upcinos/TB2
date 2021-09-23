@@ -19,8 +19,7 @@ public class ICursoDaoImpl implements ICursoDao {
             entityManager.persist(curso);
         }catch (Exception e)
         {
-            System.out.println(e.getMessage());
-            System.out.println("No se puede listar");
+            System.out.println("No se puede insertar");
         }
 
     }
@@ -35,6 +34,7 @@ public class ICursoDaoImpl implements ICursoDao {
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
+
         }
         return lista;
 

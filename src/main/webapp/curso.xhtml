@@ -18,6 +18,14 @@
     <ui:define name="content">
         <h:form>
 
+            <h:outputLabel for="idCurso"
+                           value="id Curso" styleClass="control-label" />
+            <p:inputText autocomplete="off" id="idCurso"
+                         styleClass="form-control"
+                         value="#{cursoController.curso.id}"
+                         maxlength="30" required="true" />
+
+
             <h:outputLabel for="nombreCurso"
                            value="Nombre Curso" styleClass="control-label" />
             <p:inputText autocomplete="off" id="nombreCurso"
@@ -29,14 +37,13 @@
             <h:outputLabel for="fechaInicio"
                            value="Fecha Inicio" styleClass="control-label" />
             <p:calendar autocomplete="off" id="fechaInicio"
-                         styleClass="form-control"
                          value="#{cursoController.curso.fechaInicio}"
                          maxlength="30" required="true" />
+            <br />
 
             <h:outputLabel for="fechaFin"
                            value="Fecha Fin" styleClass="control-label" />
             <p:calendar autocomplete="off" id="fechaFin"
-                         styleClass="form-control"
                          value="#{cursoController.curso.fechaFin}"
                          maxlength="30" required="true" />
 
