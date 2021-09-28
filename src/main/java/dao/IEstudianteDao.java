@@ -8,9 +8,11 @@ public interface IEstudianteDao {
     public void insertar(Estudiante estudiante);
 
     public List<Estudiante> listar();
+    
+    public void eliminar (int id_estudiante);
+    
+    public List<Estudiante> findByNameEstudiante(Estudiante estudiante);
 
-    public void eliminar(int idEstudiante);
-
-    public void modificar(Estudiante estudiante);
+  
 
 }
