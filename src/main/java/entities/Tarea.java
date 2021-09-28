@@ -1,94 +1,90 @@
 package entities;
 
-import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "Tarea")
 public class Tarea {
 
-    public Tarea(Integer id, LocalDateTime fechaInicio, LocalDateTime fechaFin, String entregable, Seccion seccion, Estudiante estudiante) {
-        this.id = id;
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
-        this.entregable = entregable;
-        this.seccion = seccion;
-        this.estudiante = estudiante;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Integer id;
+    private int id_tareas;
 
-    @Column(name = "fecha_inicio")
-    private LocalDateTime fechaInicio;
+    private Date inicioFechaTarea;
 
-    @Column(name = "fecha_fin")
-    private LocalDateTime fechaFin;
-
-    @Lob
-    @Column(name = "entregable")
-    private String entregable;
+    private Date finFechaTarea;
+    
+    @Column(name = "entregableTarea", nullable = false, length = 60)
+	private String entregableTarea;
 
     @ManyToOne
-    @JoinColumn(name = "seccion_id")
-    private Seccion seccion;
-
-    @ManyToOne
-    @JoinColumn(name = "estudiante_id")
+    @JoinColumn(name = "estudiante_id", nullable = false)
     private Estudiante estudiante;
 
-    public Tarea() {
-        super();
-    }
+	public Tarea() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-    public Estudiante getEstudiante() {
-        return estudiante;
-    }
+	public Tarea(int id_tareas, Date inicioFechaTarea, Date finFechaTarea, String entregableTarea,
+			Estudiante estudiante) {
+		super();
+		this.id_tareas = id_tareas;
+		this.inicioFechaTarea = inicioFechaTarea;
+		this.finFechaTarea = finFechaTarea;
+		this.entregableTarea = entregableTarea;
+		this.estudiante = estudiante;
+	}
 
-    public void setEstudiante(Estudiante estudiante) {
-        this.estudiante = estudiante;
-    }
+	public int getId_tareas() {
+		return id_tareas;
+	}
 
-    public Seccion getSeccion() {
-        return seccion;
-    }
+	public void setId_tareas(int id_tareas) {
+		this.id_tareas = id_tareas;
+	}
 
-    public void setSeccion(Seccion seccion) {
-        this.seccion = seccion;
-    }
+	public Date getInicioFechaTarea() {
+		return inicioFechaTarea;
+	}
 
-    public String getEntregable() {
-        return entregable;
-    }
+	public void setInicioFechaTarea(Date inicioFechaTarea) {
+		this.inicioFechaTarea = inicioFechaTarea;
+	}
 
-    public void setEntregable(String entregable) {
-        this.entregable = entregable;
-    }
+	public Date getFinFechaTarea() {
+		return finFechaTarea;
+	}
 
-    public LocalDateTime getFechaFin() {
-        return fechaFin;
-    }
+	public void setFinFechaTarea(Date finFechaTarea) {
+		this.finFechaTarea = finFechaTarea;
+	}
 
-    public void setFechaFin(LocalDateTime fechaFin) {
-        this.fechaFin = fechaFin;
-    }
+	public String getEntregableTarea() {
+		return entregableTarea;
+	}
 
-    public LocalDateTime getFechaInicio() {
-        return fechaInicio;
-    }
+	public void setEntregableTarea(String entregableTarea) {
+		this.entregableTarea = entregableTarea;
+	}
 
-    public void setFechaInicio(LocalDateTime fechaInicio) {
-        this.fechaInicio = fechaInicio;
-    }
+	public Estudiante getEstudiante() {
+		return estudiante;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public void setEstudiante(Estudiante estudiante) {
+		this.estudiante = estudiante;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+ 
 }
 
