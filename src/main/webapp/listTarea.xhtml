@@ -1,1 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
+
+
+<ui:composition template="master.xhtml">
+
+
+	<ui:define name="title">
+        .:Listado de Tareas:.
+    </ui:define>
+
+	<ui:define name="titleCont">
+		<span>Tareas </span>
+	</ui:define>
+
+	<ui:define name="content">
+
+		<h:form>
+			<div class="row">
+				<p:commandButton value="Nuevo"
+					action="#{tareaController.newTarea()}"
+					styleClass="btn btn-danger" ajax="false" />
+			</div>
+
+
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="form-group table-responsive box-table-class">
+
+						<p:dataTable id="lstTarea" var="t"
+							value="#{tareaController.listaTareas}" paginator="true"
+							paginatorPosition="top" rowsPerPageTemplate="10,20,30,40,50"
+							rows="10" styleClass="table table-bordered"
+							emptyMessage="No existen registros" rowIndexVar="item"
+							style="margin-bottom:0">
+							
+												
+
+							<p:column headerText="Id" sortBy="#{t.id_tareas}">
+								<h:outputText value="#{t.id_tareas}" />
+							</p:column>
+
+
+
+							<p:column headerText="Fecha de Inicio"
+								sortBy="#{t.inicioFechaTarea}">
+								<h:outputText value="#{t.inicioFechaTarea}">
+									<f:convertDateTime pattern="dd-MM-yyyy" timeZone="UTC"></f:convertDateTime>
+								</h:outputText>
+							</p:column>
+							
+							
+							
+							<p:column headerText="Fecha Fin"
+								sortBy="#{t.finFechaTarea}">
+								<h:outputText value="#{t.finFechaTarea}">
+									<f:convertDateTime pattern="dd-MM-yyyy" timeZone="UTC"></f:convertDateTime>
+								</h:outputText>
+							</p:column>
+
+
+
+							<p:column headerText="Entregable" sortBy="#{t.entregableTarea}">
+								<h:outputText value="#{t.entregableTarea}" />
+							</p:column>
+							
+							
+
+						
+
+
+							<p:column headerText="Estudiante"
+								sortBy="#{t.estudiante.nameEstudiante}">
+								<h:outputText
+									value="#{t.estudiante.nameEstudiante}" />
+							</p:column>
+							
+							
+							<p:column headerText="Operación" exportable="false">
+							<h:commandLink action="lstTarea" value="Eliminar"
+							actionListener="#{tareaController.eliminar(t)}"></h:commandLink>
+							</p:column>
+							<p:column headerText="Operación" exportable="false">
+
+							<h:commandLink value="Modificar"
+							action="#{tareaController.Modiftare(t)}"
+							style="color:blue;" />
+							</p:column>
+
+
+
+						</p:dataTable>
+					</div>
+
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+
+	<ui:define name="footerCont">
+
+	</ui:define>
+</ui:composition>
+</html>
