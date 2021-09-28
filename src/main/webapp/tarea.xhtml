@@ -1,1 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
+<ui:composition template="master.xhtml">
+
+	<ui:define name="title">
+        .:Registro de Tareas:.
+    </ui:define>
+
+	<ui:define name="titleCont">
+		<span>Tareas</span>
+	</ui:define>
+
+	<ui:define name="content">
+		<h:form>
+		
+		
+		
+			<h:outputLabel for="id_tareas" value="Código"
+				styleClass="control-label" />
+
+			<p:inputText autocomplete="off" id="id_tareas"
+				styleClass="form-control"
+				value="#{tareaController.tarea.id_tareas}" required="true" />
+
+
+
+			<h:outputLabel for="inicioFecha" value="Fecha de Inicio"
+				styleClass="control-label" />
+			<p:calendar id="inicioFecha" pattern="dd/MM/yyyy"
+				value="#{tareaController.tarea.inicioFechaTarea}" showOn="button"
+				timeZone="UTC" required="true">
+
+			</p:calendar>
+			
+
+			
+			<h:outputLabel for="finFecha" value="Fecha Fin"
+				styleClass="control-label" />
+			<p:calendar id="finFecha" pattern="dd/MM/yyyy"
+				value="#{tareaController.tarea.finFechaTarea}" showOn="button"
+				timeZone="UTC" required="true">
+
+			</p:calendar>
+
+
+
+			<h:outputLabel for="entregable" value="Entregable"
+				styleClass="control-label" />
+			<p:inputText autocomplete="off" id="entregable" styleClass="form-control"
+				value="#{tareaController.tarea.entregableTarea}" maxlength="60"
+				required="true" />
+
+
+
+
+			<br />
+
+			<h:outputLabel for="estudiante" value="Estudiante"
+				styleClass="control-label" />
+			<p:selectOneMenu id="estudiante"
+				value="#{tareaController.tarea.estudiante}"
+				converter="omnifaces.SelectItemsConverter">
+				<f:selectItems value="#{tareaController.listaEstudiantes}" var="e"
+					itemLabel="#{e.nameEstudiante}" itemValue="#{e}" />
+
+			</p:selectOneMenu>
+
+
+			<br />
+
+
+
+			<p:commandButton value="Grabar"
+				actionListener="#{tareaController.insertTarea()}"
+				styleClass="btn btn-primary " update="@form"
+				action="listTarea?faces-redirect=true" />
+			<p:commandButton value="Cancelar"
+				action="listTarea?faces-redirect=true" immediate="true"
+				styleClass="btn btn-default" ajax="false" />
+
+
+
+		</h:form>
+	</ui:define>
+
+	<ui:define name="footerCont">
+
+	</ui:define>
+</ui:composition>
+</html>
