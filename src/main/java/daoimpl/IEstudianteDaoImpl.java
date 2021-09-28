@@ -1,19 +1,22 @@
 package daoimpl;
 
-import dao.IEstudianteDao;
-import entities.Curso;
-import entities.Estudiante;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.ArrayList;
-import java.util.List;
+import javax.transaction.Transactional;
+
+import dao.IEstudianteDao;
+import entities.Estudiante;
 
 public class IEstudianteDaoImpl implements IEstudianteDao {
+	
     @PersistenceContext(unitName = "TB2Web")
     private EntityManager entityManager;
 
+    @Transactional
     @Override
     public void insertar(Estudiante estudiante) {
         try
@@ -21,44 +24,58 @@ public class IEstudianteDaoImpl implements IEstudianteDao {
             entityManager.persist(estudiante);
         }catch (Exception e)
         {
-            System.out.println(e.getMessage());
-            System.out.println("No se puede listar");
+            System.out.println("No se puede insertar");
         }
 
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Estudiante> listar() {
         List<Estudiante> lista = new ArrayList<Estudiante>();
-        try {
-            Query q;
-            q = entityManager.createQuery("select Estudiante from Estudiante e");
+        try {        	
+            Query q = entityManager.createQuery("select e from Estudiante e");
             lista = (List<Estudiante>) q.getResultList();
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            
+        }
+        return lista;
+
+    }
+    
+    @Transactional
+    @Override
+    public void eliminar(int id_estudiante) {
+    	Estudiante estu= new Estudiante();
+        try
+        {
+            estu=entityManager.getReference(Estudiante.class, id_estudiante);
+            entityManager.remove(estu);
+        }catch (Exception e)
+        {
+            System.out.println("No se puede eliminar");
+        }
+
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Estudiante> findByNameEstudiante(Estudiante estudiante) {
+        List<Estudiante> lista = new ArrayList<Estudiante>();
+        try {        	
+            Query q = entityManager.createQuery("from Estudiante e where e.nameEstudiante like ?1 ");
+            q.setParameter(1,"%"+ estudiante.getNameEstudiante()+ "%");
+            lista = (List<Estudiante>) q.getResultList();
+
+        } catch (Exception e) {
+            
         }
         return lista;
 
     }
 
-    @Override
-    public void eliminar(int idEstudiante) {
-        Estudiante e = new Estudiante();
-        try {
-            e = entityManager.getReference(Estudiante.class, idEstudiante);
-            entityManager.remove(e);
-        } catch (Exception exception) {
-            System.out.println(exception.getMessage());
-        }
-    }
+   
 
-    @Override
-    public void modificar(Estudiante estudiante) {
-        try {
-            entityManager.merge(estudiante);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
+  
 }
