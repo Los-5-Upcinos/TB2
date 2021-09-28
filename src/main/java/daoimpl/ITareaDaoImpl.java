@@ -1,20 +1,22 @@
 package daoimpl;
 
-import dao.IEstudianteDao;
-import dao.ITareaDao;
-import entities.Curso;
-import entities.Tarea;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.ArrayList;
-import java.util.List;
+import javax.transaction.Transactional;
+
+import dao.ITareaDao;
+import entities.Tarea;
 
 public class ITareaDaoImpl implements ITareaDao {
+	
     @PersistenceContext(unitName = "TB2Web")
     private EntityManager entityManager;
 
+	@Transactional
     @Override
     public void insertar(Tarea tarea) {
         try
@@ -22,44 +24,51 @@ public class ITareaDaoImpl implements ITareaDao {
             entityManager.persist(tarea);
         }catch (Exception e)
         {
-            System.out.println(e.getMessage());
-            System.out.println("No se puede listar");
+            System.out.println("No se puede insertar una tarea");
         }
 
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Tarea> listar() {
         List<Tarea> lista = new ArrayList<Tarea>();
         try {
-            Query q;
-            q = entityManager.createQuery("select Tarea from Tarea m");
+            Query q = entityManager.createQuery("select t from Tarea t");
             lista = (List<Tarea>) q.getResultList();
-
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+           
         }
         return lista;
-
     }
 
+    @Transactional
     @Override
-    public void eliminar(int idTarea) {
-        Tarea tarea = new Tarea();
-        try {
-            tarea = entityManager.getReference(Tarea.class, idTarea);
-            entityManager.remove(tarea);
-        } catch (Exception exception) {
-            System.out.println(exception.getMessage());
+    public void eliminar(int id_tareas) {
+    	Tarea tare= new Tarea();
+        try
+        {
+            tare=entityManager.getReference(Tarea.class, id_tareas);
+            entityManager.remove(tare);
+        }catch (Exception e)
+        {
+            System.out.println("No se puede eliminar una tarea");
         }
-    }
 
-    @Override
-    public void modificar(Tarea Tarea) {
-        try {
-            entityManager.merge(Tarea);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
     }
+    
+    
+    @Transactional
+    @Override
+    public void modificar(Tarea tarea) {
+        try
+        {
+            entityManager.merge(tarea);
+        }catch (Exception e)
+        {
+            System.out.println("No se puede insertar una tarea");
+        }
+
+    }
+  
 }
