@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xml:lang="es">
+<ui:composition template="master.xhtml">
+
+    <ui:define name="title">
+        .:Registro de Cursos:.
+    </ui:define>
+
+    <ui:define name="titleCont">
+        <span>Curso</span>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <h:panelGrid id="cursoGrid" columns="3" style="margin-top: 10px">
+                <h:outputText value="Nombre de Curso:"/>
+                <h:inputText id="nombre" required="true"
+                             requiredMessage="¡Este campo es obligatorio!" value="#{cursoController.curso.nombre}"/>
+                <h:message for="nombre" style="color:red;"/>
+                <h:outputText value="Fecha de Inicio:"/>
+                <p:calendar id="startDate" required="true"
+                            requiredMessage="¡Este campo es obligatorio!" value="#{cursoController.fechaInicioDate}"/>
+                <h:message for="startDate" style="color:red;"/>
+                <h:outputText value="Fecha de Fin:"/>
+                <p:calendar id="endDate" required="true"
+                            requiredMessage="¡Este campo es obligatorio!" value="#{cursoController.fechaFinDate}"/>
+                <h:message for="endDate" style="color:red;"/>
+            </h:panelGrid>
+            <h:commandButton value="Guardar" action="#{cursoController.insertar}" styleClass="btn btn-primary"
+                             process="@this"/>
+        </h:form>
+    </ui:define>
+
+    <ui:define name="footerCont">
+
+    </ui:define>
+</ui:composition>
+</html>

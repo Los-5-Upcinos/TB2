@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xml:lang="es">
+<ui:composition template="master.xhtml">
+
+    <ui:define name="title">
+        .:Registro de Materiales:.
+    </ui:define>
+
+    <ui:define name="titleCont">
+        <span>Material</span>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <h:panelGrid id="materialGrid" columns="3" style="margin-top: 10px">
+                <h:outputText value="Id de Material:"/>
+                <h:inputText id="idMaterial" required="true"
+                             requiredMessage="¡Este campo es obligatorio!" value="#{materialController.material.id}"/>
+                <h:message for="nombre" style="color:red;"/>
+
+                <h:outputText value="Escribe tu post:"/>
+                <p:inputTextarea id="nombre" required="true" rows="6" cols="30" autoResize="false"
+                                 requiredMessage="¡Este campo es obligatorio!"
+                                 value="#{materialController.material.post}"/>
+                <h:message for="nombre" style="color:red;"/>
+
+                <p:outputLabel for="cboCursos" value="Curso"/>
+                <p:selectOneMenu id="cboCursos"
+                                 value="#{materialController.idCurso}"
+                                 converter="omnifaces.SelectItemsConverter">
+                    <f:selectItems value="#{materialController.listaCursos}"
+                                   var="m" itemLabel="#{m.nombre}" itemValue="#{m.id}"/>
+                </p:selectOneMenu>
+
+            </h:panelGrid>
+            <p:commandButton value="Grabar"
+                             actionListener="#{materialController.modificar()}"
+                             styleClass="btn btn-primary " update="@form"
+                             action="listarMaterial?faces-redirect=true"/>
+            <p:commandButton value="Cancelar"
+                             action="listarMaterial?faces-redirect=true" immediate="true"
+                             styleClass="btn btn-default" ajax="false"/>
+        </h:form>
+    </ui:define>
+
+    <ui:define name="footerCont">
+
+    </ui:define>
+</ui:composition>
+</html>
